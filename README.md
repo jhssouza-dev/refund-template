@@ -48,5 +48,5 @@ Built with **HTML**, **CSS**, and **JavaScript**, using the **German Euro curren
 
 ## Author
 Developed by **João Souza**  
-([Add your GitHub](https://github.com/jhssouza-dev) / [LinkedIn links](https://www.linkedin.com/in/jhssouza-dev/))
+([GitHub](https://github.com/jhssouza-dev) / [LinkedIn](https://www.linkedin.com/in/jhssouza-dev/))
 
