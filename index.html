@@ -6,49 +6,47 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="styles.css" />
-
     <title>Refund</title>
   </head>
 
   <body>
     <main>
-      <img src="./img/logo.svg" alt="Convert logo" class="logo" />
+      <img src="./img/logo.svg" alt="Refund logo" class="logo" />
 
       <section>
         <form>
-          <h1>Solicitação de reembolso</h1>
+          <h1>Reimbursement Request</h1>
           <p>
-            Informe os dados da despesa para solicitar reembolso. A despesa será
-            analisada e reembolsada em até 30 dias.
+            Fill in the expense details to request a reimbursement. Your request
+            will be reviewed and processed within 30 days.
           </p>
 
           <fieldset>
-            <legend>Nome da despesa</legend>
+            <legend>Expense name</legend>
             <input type="text" id="expense" name="expense" required />
           </fieldset>
 
           <div class="inputs-row">
             <fieldset>
-              <legend>Categoria</legend>
+              <legend>Category</legend>
               <select id="category" name="category" required>
-                <option value="" disabled selected hidden>Selecione</option>
-                <option value="food">Alimentação</option>
-                <option value="accommodation">Hospedagem</option>
-                <option value="services">Serviços</option>
-                <option value="transport">Transporte</option>
-                <option value="others">Outros</option>
+                <option value="" disabled selected hidden>Select</option>
+                <option value="food">Food</option>
+                <option value="accommodation">Accommodation</option>
+                <option value="services">Services</option>
+                <option value="transport">Transport</option>
+                <option value="others">Others</option>
               </select>
             </fieldset>
 
             <fieldset>
-              <legend>Valor da despesa</legend>
+              <legend>Expense amount</legend>
               <input
                 type="text"
                 name="amount"
@@ -59,39 +57,23 @@
             </fieldset>
           </div>
 
-          <button type="submit">Adicionar despesa</button>
+          <button type="submit">Add expense</button>
         </form>
 
         <aside>
           <header>
             <p>
-              Minhas solicitações <i>&bullet;</i>
-              <span>0 despesa</span>
+              My requests <i>&bullet;</i>
+              <span>0 expense</span>
             </p>
-            <h2><small>R$</small>0,00</h2>
+            <h2><small>€</small>0,00</h2>
           </header>
 
-          <ul>
-
-            <!-- Exemplo de estrutura HTML de um item de despesa 
-             
-            <li class="expense">
-              <img src="./img/food.svg" alt="Ícone de tipo da despesa" />
-
-              <div class="expense-info">
-                <strong>Almoço</strong>
-                <span>Alimentação</span>
-              </div>
-
-              <span class="expense-amount"><small>R$</small>1.420,57</span>
-
-              <img src="./img/remove.svg" alt="remover" class="remove-icon" />
-            </li>
-            -->
-          </ul>
+          <ul></ul>
         </aside>
       </section>
     </main>
+
     <script src="scripts.js"></script>
   </body>
 </html>
