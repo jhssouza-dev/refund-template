@@ -26,13 +26,13 @@ Built with **HTML**, **CSS**, and **JavaScript**, using the **German Euro curren
 ---
 
 ## How to Run
-1. Clone the project:  
-   `git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git`
+1. Clone the project:
+   `https://github.com/jhssouza-dev/refund-template.git`
 
-2. Open the folder:  
-   `cd YOUR_REPOSITORY`
+3. Open the folder:  
+   `cd /refund-template`
 
-3. Run the app:  
+4. Run the app:  
    - Open `index.html` in your browser, **or**  
    - Use **Live Server** (recommended)
 
