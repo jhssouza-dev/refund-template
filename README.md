@@ -5,6 +5,8 @@
 A minimal and clean web application for submitting and managing reimbursement requests.  
 Built with **HTML**, **CSS**, and **JavaScript**, using the **German Euro currency format** (e.g., 1.234,56 €).
 
+👉 **Refund Template — Live Preview**  [Visit Project](https://jhssouza-dev.github.io/refund-template/)
+
 ---
 
 ## Features
