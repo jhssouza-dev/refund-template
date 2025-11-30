@@ -8,14 +8,33 @@ const expenseList = document.querySelector("ul");
 const expensesQuantity = document.querySelector("aside header p span");
 const expensesTotal = document.querySelector("aside header h2");
 
-// Input event for formatting currency
-amount.oninput = () => {
-  let value = amount.value.replace(/\D/g, "");
-  value = Number(value) / 100;
-  amount.value = formatCurrencyEUR(value);
-};
+// ------------------------------
+// FORMAT INPUT VALUE (NO EURO €)
+// ------------------------------
 
-// Format number to EUR (German format)
+function formatNumberDE(value) {
+  return value.toLocaleString("de-DE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+amount.addEventListener("input", () => {
+  let digits = amount.value.replace(/\D/g, ""); // remove tudo que não é número
+
+  if (!digits) {
+    amount.value = "";
+    return;
+  }
+
+  const number = Number(digits) / 100;
+  amount.value = formatNumberDE(number); // exibe assim: 12,50
+});
+
+// ------------------------------
+// FORMAT CURRENCY FOR OUTPUT (€)
+// ------------------------------
+
 function formatCurrencyEUR(value) {
   return value.toLocaleString("de-DE", {
     style: "currency",
@@ -23,23 +42,37 @@ function formatCurrencyEUR(value) {
   });
 }
 
-// Handle form submission
-form.onsubmit = (event) => {
+// ------------------------------
+// HANDLE FORM SUBMIT
+// ------------------------------
+form.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  const expenseName = expense.value.trim();
+  const categoryId = category.value;
+  const amountValue = amount.value.trim();
+
+  if (!expenseName || !categoryId || !amountValue) {
+    alert("Preencha todos os campos.");
+    return;
+  }
+
+  const categoryName =
+    category.options[category.selectedIndex]?.text || "Sem categoria";
+
   const newExpense = {
-    id: new Date().getTime(),
-    expense: expense.value,
-    category_id: category.value,
-    category_name: category.options[category.selectedIndex].text,
-    amount: amount.value,
-    created_at: new Date(),
+    expense: expenseName,
+    category_id: categoryId,
+    category_name: categoryName,
+    amount: amountValue, // ex: "12,50" (sem €)
   };
 
   expenseAdd(newExpense);
-};
+});
 
+// ------------------------------
 // Add item to the list
+// ------------------------------
 function expenseAdd(newExpense) {
   try {
     const expenseItem = document.createElement("li");
@@ -61,9 +94,11 @@ function expenseAdd(newExpense) {
 
     const expenseAmount = document.createElement("span");
     expenseAmount.classList.add("expense-amount");
+
+    // amount vem SEM €, aqui a gente adiciona o símbolo
     expenseAmount.innerHTML =
       `<small>€</small>` +
-      newExpense.amount.replace("€", "").trim();
+      newExpense.amount.trim();
 
     const removeIcon = document.createElement("img");
     removeIcon.classList.add("remove-icon");
@@ -82,7 +117,9 @@ function expenseAdd(newExpense) {
   }
 }
 
+// ------------------------------
 // Update totals
+// ------------------------------
 function updateTotals() {
   try {
     const items = expenseList.children;
@@ -97,12 +134,15 @@ function updateTotals() {
       const itemAmount = items[item].querySelector(".expense-amount");
 
       let value = itemAmount.textContent
-        .replace(/[^\d,]/g, "")
-        .replace(",", ".");
+        .replace(/[^\d,]/g, "") // pega só números e vírgula
+        .replace(",", "."); // vírgula para ponto
 
       value = parseFloat(value);
 
-      if (isNaN(value)) return alert("Unable to calculate total.");
+      if (isNaN(value)) {
+        alert("Unable to calculate total.");
+        return;
+      }
 
       total += Number(value);
     }
@@ -110,17 +150,19 @@ function updateTotals() {
     const symbolEUR = document.createElement("small");
     symbolEUR.textContent = "€";
 
-    total = formatCurrencyEUR(total).replace("€", "").trim();
+    let totalFormatted = formatCurrencyEUR(total).replace("€", "").trim();
 
     expensesTotal.innerHTML = "";
-    expensesTotal.append(symbolEUR, total);
+    expensesTotal.append(symbolEUR, totalFormatted);
   } catch (error) {
     console.log(error);
     alert("Unable to update totals.");
   }
 }
 
-// Click event for removing items
+// ------------------------------
+// Remove items
+// ------------------------------
 expenseList.addEventListener("click", function (event) {
   if (event.target.classList.contains("remove-icon")) {
     const item = event.target.closest(".expense");
@@ -129,7 +171,9 @@ expenseList.addEventListener("click", function (event) {
   }
 });
 
-// Clear form fields
+// ------------------------------
+// Clear form
+// ------------------------------
 function formClear() {
   expense.value = "";
   category.value = "";
